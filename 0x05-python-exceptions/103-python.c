@@ -1,7 +1,6 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
-#include <object.h>
-#include <listobject.h>
+
 
 void print_python_list(PyObject *p);
 void print_python_bytes(PyObject *p);
@@ -101,7 +100,7 @@ void print_python_float(PyObject *p)
 	}
 
 	buffer = PyOS_double_to_string(float_obj->ob_fval, 'r', 0,
-			Py_DTSF_ADD_DOT_0, NULL);
+								   Py_DTSF_ADD_DOT_0, NULL);
 	printf("  value: %s\n", buffer);
 	PyMem_Free(buffer);
 }
