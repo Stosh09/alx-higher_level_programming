@@ -1,16 +1,31 @@
 #!/usr/bin/python3
 # 9-add_item.py
-"""Add all arguments to a Python list and save them to a file."""
-import sys
+#!/usr/bin/python3
+def add_item(files):
+    """
+    adds all arguments to a Python list, and then save them to a file
 
-if __name__ == "__main__":
-    save_to_json_file = __import__('7-save_to_json_file').save_to_json_file
-    load_from_json_file = \
-        __import__('8-load_from_json_file').load_from_json_file
+    Returns:
+        None
+    """
+    save_to_json = __import__('5-save_to_json_file').save_to_json_file
+    load_from_json = __import__('6-load_from_json_file').load_from_json_file
+
+    my_file = "add_item.json"
 
     try:
-        items = load_from_json_file("add_item.json")
-    except FileNotFoundError:
-        items = []
-    items.extend(sys.argv[1:])
-    save_to_json_file(items, "add_item.json")
+        ls = load_from_json(my_file)
+    except Exception:
+        ls = []
+    ls += files
+    save_to_json(ls, my_file)
+
+
+if __name__ == '__main__':
+    """
+    Calls the function to add item when called
+    """
+    import sys
+
+    files = sys.argv[1:]
+    add_item(files)
