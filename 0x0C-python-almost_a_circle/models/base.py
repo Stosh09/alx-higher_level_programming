@@ -84,25 +84,19 @@ class Base:
             return new
 
     @classmethod
-    def load_from_file_csv(cls):
-        """Return a list of classes instantiated from a CSV file.
+    def load_from_file(cls):
+        """Return a list of classes instantiated from a file of JSON strings.
 
-        Reads from `<cls.__name__>.csv`.
+        Reads from `<cls.__name__>.json`.
 
         Returns:
             If the file does not exist - an empty list.
             Otherwise - a list of instantiated classes.
         """
-        filename = cls.__name__ + ".csv"
+        filename = str(cls.__name__) + ".json"
         try:
-            with open(filename, "r", newline="") as csvfile:
-                if cls.__name__ == "Rectangle":
-                    fieldnames = ["id", "width", "height", "x", "y"]
-                else:
-                    fieldnames = ["id", "size", "x", "y"]
-                list_dicts = csv.DictReader(csvfile, fieldnames=fieldnames)
-                list_dicts = [dict([k, int(v)] for k, v in d.items())
-                              for d in list_dicts]
+            with open(filename, "r") as jsonfile:
+                list_dicts = Base.from_json_string(jsonfile.read())
                 return [cls.create(**d) for d in list_dicts]
         except IOError:
             return []
