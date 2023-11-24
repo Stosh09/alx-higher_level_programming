@@ -3,7 +3,6 @@
 # Usage: ./0-select_states.py <mysql username> \
 #                             <mysql password> \
 #                             <database name>
-import mysql.connector
 import sys
 import MySQLdb
 
