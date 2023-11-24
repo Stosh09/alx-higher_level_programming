@@ -19,4 +19,3 @@ class State(Base):
     id = Column('id', Integer(), primary_key=True)
     name = Column('name', String(128), nullable=False)
     cities = relationship("City", backref="state", cascade="delete")
-    
